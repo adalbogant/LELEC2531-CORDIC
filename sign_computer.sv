@@ -1,5 +1,5 @@
-module sign_computer(input logic [31:0] y,
-                    input logic [31:0] z,
+module sign_computer(input logic signed [31:0] y,
+                    input logic signed [31:0] z,
                     input logic mode,
                     input logic [1:0] coord_syst,
                     output logic sign_x,

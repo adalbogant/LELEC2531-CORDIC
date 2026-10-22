@@ -1,5 +1,5 @@
-module adder(input logic [31:0] a,
-            input logic [31:0] b,
+module adder(input logic signed [31:0] a,
+            input logic signed [31:0] b,
             input logic sign,
             output logic [31:0] result);
 
