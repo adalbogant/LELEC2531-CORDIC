@@ -145,7 +145,7 @@ begin
     // arctanh(0.67)
     test(1, 0.67, 0, 1'b1, 2'b11, 0, 0, 0.810743125475, 3'b001);
 
-    $finish;
+    // $finish;
 end
 
 endmodule
