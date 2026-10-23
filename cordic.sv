@@ -4,7 +4,7 @@ module cordic (input logic clk, rst,
               input logic [1:0] coord_syst,
               output logic [31:0] x_out, y_out, z_out);
 
-// !! TODO : iter_idx commence à 1 en mode hyperbolique ?
+
 
 
 endmodule
