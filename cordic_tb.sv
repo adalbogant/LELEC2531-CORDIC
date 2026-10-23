@@ -5,14 +5,14 @@ module cordic_tb;
 function signed [31:0] to_q30(input real val);
     real scaled;
     begin
-        scaled = val <<< 30; // * 2^30
+        scaled = val * 1_073_741_824.0; // * 2^30
         to_q30 = $rtoi(scaled);
     end
 endfunction
 
 function real from_q30(input signed [31:0] val);
     begin
-        from_q30 = val >>> 30;
+        from_q30 = val / 1_073_741_824.0; // 2^30
     end
 endfunction
 
@@ -22,9 +22,9 @@ function real abs_real(input real val);
     end
 endfunction
 
-localparameter real K_CIRC = 0.607252935009;
-localparameter real K_HYPERBOLIC = 1.205136358446;
-localparameter real TOL = 0.00001;
+localparam real K_CIRC = 0.607252935009;
+localparam real K_HYPERBOLIC = 1.205136358446;
+localparam real TOL = 0.00001;
 
 logic clk, rst, start;
 logic signed [31:0] x_init, y_init, z_init;
@@ -114,7 +114,7 @@ task test;
         endcase
         
 
-        @(posedge clk)
+        @(posedge clk);
         // Break between tests
     end
 endtask
@@ -144,6 +144,8 @@ begin
 
     // arctanh(0.67)
     test(1, 0.67, 0, 1'b1, 2'b11, 0, 0, 0.810743125475, 3'b001);
+
+    $finish;
 end
 
 endmodule
