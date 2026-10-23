@@ -1,7 +1,7 @@
 module FSM_control_unit(input logic clk, rst, start,
                         input logic [1:0] coord_syst,
                         output logic enable_cfg, enable_reg, select_init,
-                        output logic [4:0] iter_idx
+                        output logic [4:0] iter_idx,
                         output logic done);
 
 // !! iter_idx commence à 1 en hyperbolique
