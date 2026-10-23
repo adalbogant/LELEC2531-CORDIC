@@ -18,7 +18,16 @@ module sign_computer(input logic signed [31:0] y,
         endcase
     end
 
-    assign sign_x = ~delta_k;
+    always_comb
+    begin
+        case (coord_syst)
+            2'b00: sign_x = 0;
+            2'b01: sign_x = ~delta_k;
+            2'b11: sign_x = delta_k;
+            default: sign_x = 0;
+        endcase
+    end
+
     assign sign_y = delta_k;
     assign sign_z = ~delta_k;
 

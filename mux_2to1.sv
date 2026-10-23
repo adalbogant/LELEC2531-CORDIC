@@ -1,7 +1,7 @@
 module mux_2to1(input logic signed [31:0] select0,
                 input logic signed [31:0] select1,
                 input logic select,
-                output logic result);
+                output logic signed [31:0] result);
 
     always_comb
     begin
