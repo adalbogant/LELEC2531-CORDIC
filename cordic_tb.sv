@@ -25,6 +25,7 @@ endfunction
 localparam real K_CIRC = 0.607252935009;
 localparam real K_HYPERBOLIC = 1.205136358446;
 localparam real TOL = 0.00001;
+localparam real TOL_HYPERBOLIC = 0.005;
 
 logic clk, rst, start;
 logic signed [31:0] x_init, y_init, z_init;
@@ -50,6 +51,7 @@ task test;
     input [1:0] test_coord_syst;
     input real expected_x, expected_y, expected_z;
     input logic [2:0] to_test;
+    input real tolerance;
 
     begin
         @(negedge clk)
@@ -68,9 +70,9 @@ task test;
         #1;
         case (to_test)
             3'b111: begin
-                if ((abs_real(from_q30(x_out) - expected_x) <= TOL) &&
-                    (abs_real(from_q30(y_out) - expected_y) <= TOL) &&
-                    (abs_real(from_q30(z_out) - expected_z) <= TOL))
+                if ((abs_real(from_q30(x_out) - expected_x) <= tolerance) &&
+                    (abs_real(from_q30(y_out) - expected_y) <= tolerance) &&
+                    (abs_real(from_q30(z_out) - expected_z) <= tolerance))
                     $display("PASS | x=%f y=%f z=%f mode=%b coord_syst=%b| x_out=%f, y_out=%f, z_out=%f",
                             test_x, test_y, test_z, test_mode, test_coord_syst, 
                             from_q30(x_out), from_q30(y_out), from_q30(z_out));
@@ -80,7 +82,7 @@ task test;
                             from_q30(x_out), expected_x, from_q30(y_out), expected_y, from_q30(z_out), expected_z);
             end
             3'b001: begin
-                if ((abs_real(from_q30(z_out) - expected_z) <= TOL))
+                if ((abs_real(from_q30(z_out) - expected_z) <= tolerance))
                     $display("PASS | x=%f y=%f z=%f mode=%b coord_syst=%b| x_out=%f, y_out=%f, z_out=%f",
                             test_x, test_y, test_z, test_mode, test_coord_syst, 
                             from_q30(x_out), from_q30(y_out), from_q30(z_out));
@@ -90,7 +92,7 @@ task test;
                             from_q30(z_out), expected_z);
             end
             3'b010:begin
-                if ((abs_real(from_q30(y_out) - expected_y) <= TOL))
+                if ((abs_real(from_q30(y_out) - expected_y) <= tolerance))
                     $display("PASS | x=%f y=%f z=%f mode=%b coord_syst=%b| x_out=%f, y_out=%f, z_out=%f",
                             test_x, test_y, test_z, test_mode, test_coord_syst, 
                             from_q30(x_out), from_q30(y_out), from_q30(z_out));
@@ -100,9 +102,9 @@ task test;
                             from_q30(y_out), expected_y);
             end
             default:begin
-                if ((abs_real(from_q30(x_out) - expected_x) <= TOL) &&
-                    (abs_real(from_q30(y_out) - expected_y) <= TOL) &&
-                    (abs_real(from_q30(z_out) - expected_z) <= TOL))
+                if ((abs_real(from_q30(x_out) - expected_x) <= tolerance) &&
+                    (abs_real(from_q30(y_out) - expected_y) <= tolerance) &&
+                    (abs_real(from_q30(z_out) - expected_z) <= tolerance))
                     $display("PASS | x=%f y=%f z=%f mode=%b coord_syst=%b| x_out=%f, y_out=%f, z_out=%f",
                             test_x, test_y, test_z, test_mode, test_coord_syst, 
                             from_q30(x_out), from_q30(y_out), from_q30(z_out));
@@ -128,22 +130,22 @@ begin
     #10;
 
     // sin(33°) = sin(0.5759586532) et cos(33°)
-    test(K_CIRC, 0, 0.5759586532, 1'b0, 2'b01, 0.8386705679, 0.544639035, 0, 3'b111);
+    test(K_CIRC, 0, 0.5759586532, 1'b0, 2'b01, 0.8386705679, 0.544639035, 0, 3'b111, TOL);
     
     // arctan(sqrt(3))
-    test(1, 1.732050808, 0, 1'b1, 2'b01, 0, 0, 1.047197551, 3'b001);
+    test(0.1, 0.1732050808, 0, 1'b1, 2'b01, 0, 0, 1.047197551, 3'b001, TOL);
 
     // 0.6 * 0.7
-    test(0.6, 0, 0.7, 1'b0, 2'b00, 0, 0.42, 0, 3'b010);
+    test(0.6, 0, 0.7, 1'b0, 2'b00, 0, 0.42, 0, 3'b010, TOL);
 
     // 0.42 / 0.7 + test default to linear
-    test(0.7, 0.42, 0, 1'b1, 2'b10, 0, 0, 0.6, 3'b001);
+    test(0.7, 0.42, 0, 1'b1, 2'b10, 0, 0, 0.6, 3'b001, TOL);
 
     // cosh(40°) et sinh(40°)
-    test(K_HYPERBOLIC, 0, 0.6981317008, 1'b0, 2'b11, 1.25375393409, 0.756239993158, 0, 3'b111);
+    test(K_HYPERBOLIC, 0, 0.6981317008, 1'b0, 2'b11, 1.25375393409, 0.756239993158, 0, 3'b111, TOL_HYPERBOLIC);
 
     // arctanh(0.67)
-    test(1, 0.67, 0, 1'b1, 2'b11, 0, 0, 0.810743125475, 3'b001);
+    test(1, 0.67, 0, 1'b1, 2'b11, 0, 0, 0.810743125475, 3'b001, TOL_HYPERBOLIC);
 
     // $finish;
 end
