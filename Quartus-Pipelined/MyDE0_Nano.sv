@@ -137,7 +137,7 @@ input logic 		     [1:0]		GPIO_1_IN
 				};
 				8'h10: ReadDataM = cordic_x_out;
 				8'h14: ReadDataM = cordic_y_out;
-				8'h18: ReadDataM = cordic_z_out
+				8'h18: ReadDataM = cordic_z_out;
 				default: ReadDataM = 32'b0;
 			endcase
 		end
@@ -157,15 +157,17 @@ input logic 		     [1:0]		GPIO_1_IN
 			cordic_x_init <= 0;
 			cordic_y_init <= 0;
 			cordic_z_init <= 0;
-			cordic_done <= 0;
+			// cordic_done <= 0; TODO : remove ?
 			cordic_done_status <= 0;
 		end
 		else if (MemWriteM & cs_cordic) begin
 			case (DataAdrM[7:0])
 				8'h00: begin
-					   cordic_start <= WriteDataM[0]
-					   cordic_mode <= WriteDataM[16]
-					   cordic_coord_syst <= WriteDataM[25:24]
+					   cordic_start <= WriteDataM[0];
+					   cordic_mode <= WriteDataM[16];
+					   cordic_coord_syst <= WriteDataM[25:24];
+					   if (WriteDataM[0])
+					   		cordic_done_status <= 1'b0;		// When the computation start, we reset the done status
 				end
 				8'h04: cordic_x_init <= WriteDataM;
 				8'h08: cordic_y_init <= WriteDataM;
