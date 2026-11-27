@@ -1,6 +1,6 @@
 Assembler report for MyDE0_Nano
-Thu Nov 21 15:14:45 2024
-Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+Fri Nov 27 11:21:49 2026
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
 ---------------------
@@ -11,7 +11,7 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
   3. Assembler Settings
   4. Assembler Encrypted IP Cores Summary
   5. Assembler Generated Files
-  6. Assembler Device Options: C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/MyDE0_Nano.sof
+  6. Assembler Device Options: C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/MyDE0_Nano.sof
   7. Assembler Messages
 
 
@@ -38,7 +38,7 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Thu Nov 21 15:14:45 2024 ;
+; Assembler Status      ; Successful - Fri Nov 27 11:21:49 2026 ;
 ; Revision Name         ; MyDE0_Nano                            ;
 ; Top-level Entity Name ; MyDE0_Nano                            ;
 ; Family                ; Cyclone IV E                          ;
@@ -63,23 +63,23 @@ refer to the applicable agreement for further details.
 +--------+------------------------+--------------+
 
 
-+------------------------------------------------------------------+
-; Assembler Generated Files                                        ;
-+------------------------------------------------------------------+
-; File Name                                                        ;
-+------------------------------------------------------------------+
-; C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/MyDE0_Nano.sof ;
-+------------------------------------------------------------------+
++----------------------------------------------------------------------+
+; Assembler Generated Files                                            ;
++----------------------------------------------------------------------+
+; File Name                                                            ;
++----------------------------------------------------------------------+
+; C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/MyDE0_Nano.sof ;
++----------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/MyDE0_Nano.sof ;
-+----------------+---------------------------------------------------------------------------+
-; Option         ; Setting                                                                   ;
-+----------------+---------------------------------------------------------------------------+
-; JTAG usercode  ; 0x00225B41                                                                ;
-; Checksum       ; 0x00225B41                                                                ;
-+----------------+---------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/MyDE0_Nano.sof ;
++----------------+-------------------------------------------------------------------------------+
+; Option         ; Setting                                                                       ;
++----------------+-------------------------------------------------------------------------------+
+; JTAG usercode  ; 0x003CD6C5                                                                    ;
+; Checksum       ; 0x003CD6C5                                                                    ;
++----------------+-------------------------------------------------------------------------------+
 
 
 +--------------------+
@@ -87,16 +87,16 @@ refer to the applicable agreement for further details.
 +--------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
-    Info: Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
-    Info: Processing started: Thu Nov 21 15:13:41 2024
+    Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+    Info: Processing started: Fri Nov 27 11:21:47 2026
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off MyDE0_Nano -c MyDE0_Nano
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4699 megabytes
-    Info: Processing ended: Thu Nov 21 15:14:45 2024
-    Info: Elapsed time: 00:01:04
+    Info: Peak virtual memory: 4696 megabytes
+    Info: Processing ended: Fri Nov 27 11:21:49 2026
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:01
 
 

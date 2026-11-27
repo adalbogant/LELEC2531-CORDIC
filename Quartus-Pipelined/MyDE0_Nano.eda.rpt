@@ -1,6 +1,6 @@
 EDA Netlist Writer report for MyDE0_Nano
-Thu Nov 21 15:15:58 2024
-Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+Fri Nov 27 11:21:57 2026
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
 ---------------------
@@ -36,7 +36,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Thu Nov 21 15:15:58 2024 ;
+; EDA Netlist Writer Status ; Successful - Fri Nov 27 11:21:57 2026 ;
 ; Revision Name             ; MyDE0_Nano                            ;
 ; Top-level Entity Name     ; MyDE0_Nano                            ;
 ; Family                    ; Cyclone IV E                          ;
@@ -66,20 +66,20 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------------------------------------------+---------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------+
-; Simulation Generated Files                                                                                ;
-+-----------------------------------------------------------------------------------------------------------+
-; Generated Files                                                                                           ;
-+-----------------------------------------------------------------------------------------------------------+
-; C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano_6_1200mv_85c_slow.vo     ;
-; C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano_6_1200mv_0c_slow.vo      ;
-; C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano_min_1200mv_0c_fast.vo    ;
-; C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano.vo                       ;
-; C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano_6_1200mv_85c_v_slow.sdo  ;
-; C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano_6_1200mv_0c_v_slow.sdo   ;
-; C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano_min_1200mv_0c_v_fast.sdo ;
-; C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano_v.sdo                    ;
-+-----------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------+
+; Simulation Generated Files                                                                                    ;
++---------------------------------------------------------------------------------------------------------------+
+; Generated Files                                                                                               ;
++---------------------------------------------------------------------------------------------------------------+
+; C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano_6_1200mv_85c_slow.vo     ;
+; C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano_6_1200mv_0c_slow.vo      ;
+; C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano_min_1200mv_0c_fast.vo    ;
+; C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano.vo                       ;
+; C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano_6_1200mv_85c_v_slow.sdo  ;
+; C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano_6_1200mv_0c_v_slow.sdo   ;
+; C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano_min_1200mv_0c_v_fast.sdo ;
+; C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/MyDE0_Nano_v.sdo                    ;
++---------------------------------------------------------------------------------------------------------------+
 
 
 +-----------------------------+
@@ -87,22 +87,22 @@ refer to the applicable agreement for further details.
 +-----------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
-    Info: Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
-    Info: Processing started: Thu Nov 21 15:15:25 2024
+    Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+    Info: Processing started: Fri Nov 27 11:21:53 2026
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off MyDE0_Nano -c MyDE0_Nano
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (204019): Generated file MyDE0_Nano_6_1200mv_85c_slow.vo in folder "C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file MyDE0_Nano_6_1200mv_0c_slow.vo in folder "C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file MyDE0_Nano_min_1200mv_0c_fast.vo in folder "C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file MyDE0_Nano.vo in folder "C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file MyDE0_Nano_6_1200mv_85c_v_slow.sdo in folder "C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file MyDE0_Nano_6_1200mv_0c_v_slow.sdo in folder "C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file MyDE0_Nano_min_1200mv_0c_v_fast.sdo in folder "C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
-Info (204019): Generated file MyDE0_Nano_v.sdo in folder "C:/Users/auwattiez/Desktop/Lab5/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MyDE0_Nano_6_1200mv_85c_slow.vo in folder "C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MyDE0_Nano_6_1200mv_0c_slow.vo in folder "C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MyDE0_Nano_min_1200mv_0c_fast.vo in folder "C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MyDE0_Nano.vo in folder "C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MyDE0_Nano_6_1200mv_85c_v_slow.sdo in folder "C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MyDE0_Nano_6_1200mv_0c_v_slow.sdo in folder "C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MyDE0_Nano_min_1200mv_0c_v_fast.sdo in folder "C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file MyDE0_Nano_v.sdo in folder "C:/Users/louis/UCLOUVAIN/DES/CORDIC/Quartus-Pipelined/simulation/modelsim/" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4680 megabytes
-    Info: Processing ended: Thu Nov 21 15:15:58 2024
-    Info: Elapsed time: 00:00:33
-    Info: Total CPU time (on all processors): 00:00:02
+    Info: Peak virtual memory: 4700 megabytes
+    Info: Processing ended: Fri Nov 27 11:21:57 2026
+    Info: Elapsed time: 00:00:04
+    Info: Total CPU time (on all processors): 00:00:04
 
 
