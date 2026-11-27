@@ -66,19 +66,19 @@ sign_computer SIGN_COMP(
     .sign_x(sign_x), .sign_y(sign_y), .sign_z(sign_z)
 );
 
-adder ADDER_X(
+cordic_adder ADDER_X(
     .a(x_reg),
     .b(second_input_adder_x),
     .sign(sign_x),
     .result(x_k)
 );
-adder ADDER_Y(
+cordic_adder ADDER_Y(
     .a(y_reg),
     .b(shifted_x),
     .sign(sign_y),
     .result(y_k)
 );
-adder ADDER_Z(
+cordic_adder ADDER_Z(
     .a(z_reg),
     .b(result_angle_LUT),
     .sign(sign_z),

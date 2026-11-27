@@ -1,4 +1,4 @@
-module adder(input logic signed [31:0] a,
+module cordic_adder(input logic signed [31:0] a,
             input logic signed [31:0] b,
             input logic sign,
             output logic [31:0] result);
