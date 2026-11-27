@@ -20,7 +20,7 @@ sleep(0.1)
 GPIO.output(MyARM_ResetPin, GPIO.LOW)  
 sleep(0.1) 
 
-# Send the first SPI packet: Writing coord_syst and mode at address 0x400
+# Send the first SPI packet: Writing coord_syst (01 : Circular) and mode (0 : Rotation) at address 0x400
 ToSPI = [0x80, 0x01, 0x00, 0x00, 0x00]  # YOU NEED TO MODIFY THIS LINE
 FromSPI = MySPI_FPGA.xfer2(ToSPI) 
 sleep(0.1)  

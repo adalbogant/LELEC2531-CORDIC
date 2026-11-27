@@ -107,7 +107,7 @@ input logic 		     [1:0]		GPIO_1_IN
 	
 	/* MAPPING CORDIC
 	‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-	 0x0600 : Configuration & Control : bit 25:24 = coord_system ; bit 16 = mode ; bit 8 = done ; bit 0 = start
+	 0x0600 : Configuration & Control : bit 25:24 = coord_system ; bit 16 = mode ; bit 0 = start (when reading) and done (when writing)
 	 0x0604 : x_init
 	 0x0608 : y_init
 	 0x060C : z_init
@@ -129,7 +129,12 @@ input logic 		     [1:0]		GPIO_1_IN
 		else if (cs_led) ReadDataM = {24'h000000, led_reg};
 		else if (cs_cordic) begin
 			case (DataAdrM[7:0])
-				8'h00: ReadDataM = {32'b0, cordic_done_status};
+				8'h00: ReadDataM = {
+					6'b0, cordic_coord_syst,	// Bit [31:24] : 000000{coord_syst[1:0]}
+					7'b0, cordic_mode,			// Bit [23:16] : 0000000{mode[0]}
+					8'b0,						// Bit [15:8] : 0000000
+					7'b0, cordic_done_status	// Bit [7:0] : 0000000{cordic_done_status}
+				};
 				8'h10: ReadDataM = cordic_x_out;
 				8'h14: ReadDataM = cordic_y_out;
 				8'h18: ReadDataM = cordic_z_out
@@ -170,7 +175,7 @@ input logic 		     [1:0]		GPIO_1_IN
 		else if (cordic_done)
 			cordic_done_status <= 1'b1;
 		else
-			cordic_start <= 1'b0;
+			cordic_start <= 1'b0;	// Do not retrigger the start
 	end
 
 	// Testbench

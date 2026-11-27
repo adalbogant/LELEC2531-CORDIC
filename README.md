@@ -19,7 +19,7 @@
 ### Memory mapping
 /* MAPPING CORDIC
 	‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-	 0x0600 : Configuration & Control : bit 25:24 = coord_system ; bit 16 = mode ; bit 8 = done ; bit 0 = start
+	 0x0600 : Configuration & Control : bit 25:24 = coord_system ; bit 16 = mode ; bit 0 = done (when writing) or start (when reading)
 	 0x0604 : x_init
 	 0x0608 : y_init
 	 0x060C : z_init
