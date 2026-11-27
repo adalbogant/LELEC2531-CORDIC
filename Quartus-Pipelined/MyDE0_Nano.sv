@@ -69,9 +69,18 @@ input logic 		     [1:0]		GPIO_1_IN
 	logic 		 	MemWriteM;
 	logic [31:0] 	PCF, InstrF, ReadDataM, ReadData_dmem, ReadData_spi;
 	
-	logic  			cs_dmem, cs_led, cs_spi;
+	logic  			cs_dmem, cs_led, cs_spi, cs_cordic;
 	logic [7:0] 	led_reg;
 	logic [31:0]	spi_data;
+
+	// CORDIC Inputs (written on clock edge based on WriteDataM, sequentially)
+	logic 			cordic_start, cordic_mode;
+	logic [1:0]		cordic_coord_syst;
+	logic signed [31:0]	cordic_x_init, cordic_y_init, cordic_z_init; 
+
+	// CORDIC Outputs
+	logic 			cordic_done, cordic_done_status;	// cordic_done lasts only one cycle ; cordic_done_status is true until reset / restart
+	logic signed [31:0]	cordic_x_out, cordic_y_out, cordic_z_out;
 	
 	assign clk   = CLOCK_50;
 	assign reset = GPIO_0_PI[1];
@@ -80,28 +89,89 @@ input logic 		     [1:0]		GPIO_1_IN
 	arm arm(clk, reset, PCF, InstrF, MemWriteM, DataAdrM, WriteDataM, ReadDataM);
 	imem imem(PCF, InstrF);
 	dmem dmem(clk, cs_dmem, MemWriteM, DataAdrM, WriteDataM, ReadData_dmem);
+	cordic cordic(
+					clk, reset, cordic_start, 
+				 	cordic_x_init, cordic_y_init, cordic_z_init, 
+					cordic_mode, 
+					cordic_coord_syst, 
+					cordic_x_out, cordic_y_out, cordic_z_out,
+					cordic_done
+	);
 	
 	// Chip Select logic
 	
 	// Address MAP : 0x0000 - 0x03FF : RAM (255 words of 32 bits)
-   //               0x0400 - 0x043F : SPI - 16 reg. of 32 bits
-   //               0x0500 :        : LED Reg
+   	//               0x0400 - 0x043F : SPI - 16 reg. of 32 bits
+  	//               0x0500 :        : LED Reg
+   	// 				 0x0600          : CORDIC accelerator
+	
+	/* MAPPING CORDIC
+	‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+	 0x0600 : Configuration & Control : bit 25:24 = coord_system ; bit 16 = mode ; bit 8 = done ; bit 0 = start
+	 0x0604 : x_init
+	 0x0608 : y_init
+	 0x060C : z_init
+	 0x0610 : x_out
+	 0x0614 : y_out
+	 0x0618 : z_out
+	________________________________________________________ */
+
 
 	assign cs_dmem   = ~DataAdrM[11] & ~DataAdrM[10];											// 0x-0-- to 0x-3--
 	assign cs_spi    = ~DataAdrM[11] &  DataAdrM[10] & ~DataAdrM[9] & ~DataAdrM[8];	// 0x-4--
 	assign cs_led    = ~DataAdrM[11] &  DataAdrM[10] & ~DataAdrM[9] &  DataAdrM[8];	// 0x-5--
+	assign cs_cordic = ~DataAdrM[11] &  DataAdrM[10] &  DataAdrM[9] & ~DataAdrM[8]; // 0x-6--
 	
-	// Read Data
+	// Read Data (from external source (DMEM, SPI, CORDIC) to ARM processor)
 	always_comb
 		if (cs_dmem) ReadDataM = ReadData_dmem;
 		else if (cs_spi) ReadDataM = spi_data;
 		else if (cs_led) ReadDataM = {24'h000000, led_reg};
+		else if (cs_cordic) begin
+			case (DataAdrM[7:0])
+				8'h00: ReadDataM = {32'b0, cordic_done_status};
+				8'h10: ReadDataM = cordic_x_out;
+				8'h14: ReadDataM = cordic_y_out;
+				8'h18: ReadDataM = cordic_z_out
+				default: ReadDataM = 32'b0;
+			endcase
+		end
 		else ReadDataM = 32'b0;
 	
 	// LED logic	
 	assign LED = led_reg;	
 	always_ff @(posedge clk)
     	if (MemWriteM & cs_led) led_reg <= WriteDataM[7:0];
+	
+	// CORDIC Write (from ARM Processor / SPI to CORDIC arguments)
+	always_ff @(posedge clk) begin
+		if (reset) begin
+			cordic_start <= 0;
+			cordic_mode <= 0;
+			cordic_coord_syst <= 0;
+			cordic_x_init <= 0;
+			cordic_y_init <= 0;
+			cordic_z_init <= 0;
+			cordic_done <= 0;
+			cordic_done_status <= 0;
+		end
+		else if (MemWriteM & cs_cordic) begin
+			case (DataAdrM[7:0])
+				8'h00: begin
+					   cordic_start <= WriteDataM[0]
+					   cordic_mode <= WriteDataM[16]
+					   cordic_coord_syst <= WriteDataM[25:24]
+				end
+				8'h04: cordic_x_init <= WriteDataM;
+				8'h08: cordic_y_init <= WriteDataM;
+				8'h0C: cordic_z_init <= WriteDataM;
+			endcase
+		end
+		else if (cordic_done)
+			cordic_done_status <= 1'b1;
+		else
+			cordic_start <= 1'b0;
+	end
 
 	// Testbench
 	assign GPIO_1[33]    = MemWriteM;

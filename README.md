@@ -16,6 +16,18 @@
     * Ne jamais dépasser 1.9999... dans aucun cas (donc x + ... / y + ... / z + ...)
     => Essayer de rester < 0.66 pour les éléments des fractions
 
+### Memory mapping
+/* MAPPING CORDIC
+	‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+	 0x0600 : Configuration & Control : bit 25:24 = coord_system ; bit 16 = mode ; bit 8 = done ; bit 0 = start
+	 0x0604 : x_init
+	 0x0608 : y_init
+	 0x060C : z_init
+	 0x0610 : x_out
+	 0x0614 : y_out
+	 0x0618 : z_out
+	________________________________________________________ */
+
 ### Potentielles améliorations
 * 3 LUTs pour z (une pour 2^-i en linéaire) VS calculer le deuxième input de z en mode linéaire on-the-fly
 * Fusionner le résultat de la LUT pour linéaire, ciruclar et hyperbolic après i=10
